@@ -1,0 +1,3 @@
+[submodule "uswap-map"]
+	path = include/uswap-map
+	url = https://github.com/mc-funk/mc-funk.github.io/uswap-map
