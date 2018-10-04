@@ -1,0 +1,3 @@
+001_first_migration: COMPLETE
+002_second_migration: FAILED
+003_third_migration: PROCESSING
