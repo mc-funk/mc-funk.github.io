@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Offline for maintenance</title>
+        <style>
+            main {
+                display: flex;
+                flex-direction: column;
+                width: 981px;
+                margin: auto;
+                margin-top: 15%;
+                margin-bottom: 5%;
+            }
+            h1 {
+                font-family: 'Karla', 'Helvetica', 'Arial', Sans-serif;
+                font-weight: normal;
+                font-size: 64px;
+                line-height: 0.5;
+                color: #333A40;
+                margin-top: 0;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            h2 {
+                font-family: 'Karla', 'Helvetica', 'Arial', Sans-serif;
+                font-weight: bold;
+                font-size: 44px;
+                color: #333A40;
+                margin-top: 0;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            p {
+                font-family: 'Karla', 'Helvetica', 'Arial', Sans-serif;
+                font-weight: normal;
+                font-size: 24px;
+                line-height: 1.5;
+                color: #333A40;
+                opacity: 0.73;
+                margin: auto;
+                margin-top: 0;
+                margin-bottom: 30px;
+                text-align: center;
+                max-width: 850px;
+            }
+            a.button {
+                border-radius: 2px;
+                background: #339AF0;
+                font-family: 'Karla', 'Helvetica', 'Arial', Sans-serif;
+                font-size: 18px;
+                font-weight: normal;
+                box-sizing: border-box;
+                color: #fff;
+                display: inline-block;
+                text-decoration: none;
+                padding: 10px 40px;
+                margin: auto;
+                transition: 0.3s all ease-in-out;
+            }
+            a.button:hover {
+                background: #1C7ED6;
+            }
+            a,
+            a.link {
+                box-sizing: border-box;
+                font-family: 'Karla', 'Helvetica', 'Arial', Sans-serif;
+                font-weight: bold;
+                color: #339AF0;
+                font-size: 18px;
+            }
+          table.migrations {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .migrations tr {
+            border-radius: 20px;
+            border-width: 2px;
+          }
+          .migrations td {
+             font-family: 'Karla', 'Helvetica', 'Arial', Sans-serif;
+             font-weight: normal;
+             font-size: 24px;
+             line-height: 1.5;
+             color: #333A40;
+             opacity: 0.73;
+             margin: auto;
+             margin-top: 0;
+             margin-bottom: 30px;
+             text-align: center;
+             max-width: 850px;
+          }
+          .migrations .status {
+            text-align: right;
+          }
+          .migrations .name {
+            text-align: left;
+          }
+          .migrations .complete {
+            font-weight: bold;
+            color: #50C946;
+          }
+          .migrations .failed {
+            font-weight: bold;
+            color: #F20000;
+          }
+          .migrations .processing {
+            color: #96959a;
+          }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>We're offline for maintenance.</h1>
+            <p>Sorry for the inconvenience.</p>
+            <div>
+              <table class="migrations"></table>
+            </div>
+        </main>
+    </body>
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+      var tempCount = 0;
+    const migrationTxt = 'https://mc-funk.github.io/sampletxt.txt';
+    function loadMigrations() {
+      $( '.migrations' ).empty();
+      console.log('loadMigrations');
+      tempCount++;
+      
+      $.get(migrationTxt, function(txt) {
+        $.each(txt.split(/[\n\r]+/), function(index, line) {
+        console.log('line', line);
+          if(line) {
+            var name=line.split(': ')[0];
+            var status=line.split(': ')[1].toLowerCase();
+            console.log('status', status);
+            var humanStatus = status.slice(0,1)
+              .toUpperCase()
+              .concat(status.slice(1));
+            var row = '<tr><td class="name">'+name+'</td><td class="status '+ status +'">'+humanStatus+'</td></tr>';
+            $(row).appendTo('.migrations');
+          }
+        });
+       });
+    }
+    
+    // with thanks to https://stackoverflow.com/a/25446696/4318362
+    loadMigrations(); // This will run on page load
+    // setInterval(function(){
+    //   loadMigrations() // this will run after every 5 seconds
+    // }, 5000);
+    })
+  </script>
+</html>
+
