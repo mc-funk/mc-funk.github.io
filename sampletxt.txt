@@ -1,3 +1,5 @@
 001_first_migration: COMPLETE
 002_second_migration: FAILED
 003_third_migration: PROCESSING
+004_fourth_migration_this_one_is_really_long_and_has_much_to_say: FAILED
+004_fifth_migration_this_one_is_really_long_and_has_much_to_say: COMPLETE
